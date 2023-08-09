@@ -1,0 +1,448 @@
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <title>Icecream Parlor Queueing System</title>
+
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body class="container bg-light ">
+  <!-- Start Header form -->
+  <div class="text-center pt-5" style="animation: fadeIn 5s !important;" id="mainHeaing">
+    <img src="image-logo\logo.png" alt="network-logo" width="100" height="100" />
+    <h2 style="color: whitesmoke; padding-top: 40px; ">Icecream Parlor Queuing System</h2>
+  </div>
+  <!-- End Header form -->
+
+  <!-- Start Card -->
+  <div class="card" id="form">
+    <!-- Start Card Body -->
+    <div class="card-body">
+      <!-- Start Form -->
+      <div id="bookingForm" class="needs-validation" novalidate autocomplete="off">
+        <!-- Start Input Name -->
+
+        <!-- Start Input Name -->
+        <!-- Start Upload Data -->
+        <!-- <div class="form-group">
+          <label for="inputName">Upload CSV File</label>
+          <input type="file" class="form-control" id="csvFile" name="csvFile" placeholder="Upload csv File" required />
+          <small class="form-text text-muted">Please Upload csv File</small>
+        </div>
+        <div class="form-group col-md-4">
+          <button class="form-control btn btn-success" id="uploadData">Upload Data</button>
+        </div> -->
+        <!-- End Upload Datax -->
+        <div class="form-group" style="display: none;">
+          <label for="inputName">Entry Type</label>
+          <select class="form-control mr-1" id="entryType" name="entryType" required>
+            <option value="" disabled>Entry Type</option>
+            <option value="1" selected>Mean and Service Time Entry</option>
+            <option value="2">Arrival & Service Time Entry</option>
+          </select>
+          <!-- <input type="text" class="form-control" id="inputName" name="name" placeholder="Your name" required />
+          <small class="form-text text-muted">Please fill your name</small> -->
+        </div>
+        <div id="form-top">
+          <div class="form-group" id="serverTypeArea">
+            <label for="inputName">Server Type</label>
+            <select class="form-control mr-1" id="serverType" name="serverType" required>
+              <option value="" disabled selected>Server Type</option>
+              <option value="1">M/M/C</option>
+              <option value="2">G/G/C</option>
+              <option value="3">M/G/C</option>
+            </select>
+            <!-- <input type="text" class="form-control" id="inputName" name="name" placeholder="Your name" required />
+          <small class="form-text text-muted">Please fill your name</small> -->
+          </div>
+          <!-- End Input Name -->
+          <div id="meanForm">
+            <!-- Start Input Name -->
+            <div class="form-group">
+              <label for="inputName"> Number of servers </label>
+              <input type="number" class="form-control" id="noOfServers" name="noOfServers" placeholder="Enter Number Of Servers" required />
+              <small class="form-text text-muted">Please fill number of servers</small>
+            </div>
+            <div class="form-group">
+              <label for="inputName"> Mean of inter arrival </label>
+              <input type="number" class="form-control" id="meanIA" name="meanIA" placeholder="Enter Mean of inter arrival (having exponential distribution )" required />
+              <small class="form-text text-muted">Please fill mean of inter arrival (having exponential distribution
+                )</small>
+            </div>
+            <div class="form-group" style="display: none;" id="meanServiceView">
+              <label for="inputName"> Mean of service time </label>
+              <input type="number" class="form-control" id="meanService" name="meanService" placeholder="Enter Mean of service time" />
+              <small class="form-text text-muted">Please fill mean of service time</small>
+            </div>
+            <div class="form-group" style="display: none;" id="abc">
+              <label for="inputName"> Mean of service time having uniform distribution (maximum) </label>
+              <input type="number" class="form-control" id="meanServiceTimeMax" name="meanServiceTimeMax" placeholder="Enter Mean of service time having uniform distribution (maximum)" />
+              <small class="form-text text-muted">Please fill mean of service time having uniform distribution
+                (maximum)</small>
+            </div>
+            <div class="form-group" style="display: none;" id="abd">
+              <label for="inputName">Mean of service time having uniform distribution (minimum)</label>
+              <input type="number" class="form-control" id="meanServiceTimeMin" name="meanServiceTimeMin" placeholder="Enter Mean of service time having uniform distribution (minimum)" />
+              <small class="form-text text-muted">Please fill mean of service time having uniform distribution
+                (minimum)</small>
+            </div>
+
+          </div>
+          <div style="display: none;" id="iterationForm">
+            <div class="container iterationCloneArea">
+              <div class="row iterativeData">
+                <div class="form-group col-md-6">
+                  <label for="inputName"> Inter Arrival Time </label>
+                  <input type="number" class="form-control arrivalTime" name="arrivals" placeholder="Enter Inter Arrival Time" required />
+                  <small class="form-text text-muted">Please Enter Inter Arrival Time</small>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputName"> Service Time </label>
+                  <input type="number" class="form-control serviceTime" name="serviceTime" placeholder="Enter Service Time" required />
+                  <small class="form-text text-muted">Please Enter Service Time</small>
+                </div>
+
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <button class="form-control btn btn-success add">Add</button>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Start Submit Button -->
+        <button class="btn btn-primary btn-block col-lg-2" id="submitData">Submit</button>
+        <!-- End Submit Button -->
+      </div>
+      <!-- End Form -->
+
+    </div>
+    <!-- End Card Body -->
+  </div>
+  <!-- End Card -->
+
+  <!-- Start Card -->
+  <div class="card" id="report" style="display:none;">
+    <!-- Start Card Body -->
+    <div class="card-body">
+      <div class="card-header"><button class="btn btn-warning back">Back</button><span style="color: #fff;"> Result</span></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                Lambda (λ)
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="lambda"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                MU (µ)
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="mu"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                Rho (ρ)
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="rho"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                Avg No.of Patients In Queue
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="listInQueue"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                Avg No.of Patients In System
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="listInSystem"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                Wait In System
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="waitInSystem"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                Wait In Queue
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="waitInQueue"></h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                Server Utilization
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="idelServerProb"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                Server Utilization / Idle
+              </div>
+              <div class="card-body">
+                <canvas id="myChart" width="400" height="400"></canvas>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Card Body -->
+  </div>
+
+
+  <!-- End Card -->
+  <!-- Report 2 Start -->
+  <div class="card" id="report2" style="display:none;">
+    <!-- Start Card Body -->
+    <div class="card-body">
+      <div class="card-header"><button class="btn btn-warning back">Back</button> Result</div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3  mb-2">
+            <div class="card">
+              <div class="card-header">
+                Avarage Arrival Time (λ)
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="avarageArrival"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3  mb-2">
+            <div class="card">
+              <div class="card-header">
+                Avarage Service Time (µ)
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="avarageServiceTime"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3  mb-2">
+            <div class="card">
+              <div class="card-header">
+                Avarage Wait In System
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="avarageTAT"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3  mb-2">
+            <div class="card">
+              <div class="card-header">
+                Avarage Wait In Queue
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="avarageWaitInQueue"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3  mb-2">
+            <div class="card">
+              <div class="card-header">
+                Length Of System
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="listInSystemReport2"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3  mb-2">
+            <div class="card">
+              <div class="card-header">
+                Length Of Queue
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="listInQueueReport2"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3  mb-2">
+            <div class="card">
+              <div class="card-header">
+                Server 1 Utilization
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="server1Utilization"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3  mb-2">
+            <div class="card">
+              <div class="card-header">
+                Server 2 Utilization
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="server2Utilization"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3  mb-2">
+            <div class="card">
+              <div class="card-header">
+                Probability Of Server 1 Idle
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="server1Idel"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3  mb-2">
+            <div class="card">
+              <div class="card-header">
+                Probability Of Server 2 Idle
+              </div>
+              <div class="card-body">
+                <h2 class="card-title" id="server2Idel"></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mb-2">
+            <div class="card">
+              <div class="card-header">
+                Inter Arrival And Service Time Chart
+              </div>
+              <div class="card-body">
+                <canvas id="interArrivalServiceTimeChart" width="400" height="400"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="card">
+              <div class="card-header">
+                Server 1 Utilizations
+              </div>
+              <div class="card-body">
+                <canvas id="server1UtilizationGraph" width="400" height="400"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="card">
+              <div class="card-header">
+                Server 2 Utilizations
+              </div>
+              <div class="card-body">
+                <canvas id="server2UtilizationGraph" width="400" height="400"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="card">
+              <div class="card-header">
+                Server 1 Utilization / Idle
+              </div>
+              <div class="card-body">
+                <canvas id="server1Graph" width="400" height="400"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="card">
+              <div class="card-header">
+                Server 2 Utilization / Idle
+              </div>
+              <div class="card-body">
+                <canvas id="server2Graph" width="400" height="400"></canvas>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- End Card Body -->
+  </div>
+  <!-- Report 2 END -->
+  <footer>
+    <div class="my-4 text-muted text-center">
+      <p>© </p>
+    </div>
+  </footer>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="js/jquery-3.6.0.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/Chart.min.js"></script>
+  <script src="js/circle-progress.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/jquery.csv.js"></script>
+
+
+
+  <!-- Start Scritp for Form -->
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+  <!-- End Scritp for Form -->
+
+</body>
